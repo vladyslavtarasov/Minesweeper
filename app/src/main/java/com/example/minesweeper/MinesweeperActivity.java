@@ -1,5 +1,7 @@
 package com.example.minesweeper;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
@@ -17,17 +19,21 @@ public class MinesweeperActivity extends AppCompatActivity {
     private TextView timerText;
     private Timer gameTimer;
     private long startTime;
+    private int rows, columns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minesweeper);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         gridLayout = findViewById(R.id.grid_layout);
         timerText = findViewById(R.id.timer_text);
 
-        int rows = 8;
-        int columns = 10;
+        Intent intent = getIntent();
+        rows = intent.getIntExtra("rows", 10);
+        columns = intent.getIntExtra("columns", 10);
 
         minesweeperGame = new MinesweeperGame(this, rows, columns);
         minesweeperGame.createGame(gridLayout);

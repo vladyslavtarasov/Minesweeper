@@ -1,6 +1,7 @@
 package com.example.minesweeper;
 
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +48,9 @@ public class MinesweeperGame {
 
         int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
         int screenHeight = activity.getResources().getDisplayMetrics().heightPixels;
-        int buttonSize = Math.min(screenWidth / columns, screenHeight / rows);
+        int availableHeight = screenHeight - getStatusBarHeight() - getActionBarHeight();
+
+        int buttonSize = Math.min(screenWidth / columns, availableHeight / rows);
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -66,6 +69,24 @@ public class MinesweeperGame {
                 gridLayout.addView(buttons[i][j]);
             }
         }
+    }
+
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = activity.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    private int getActionBarHeight() {
+        int result = 0;
+        TypedValue typedValue = new TypedValue();
+        if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
+            result = TypedValue.complexToDimensionPixelSize(typedValue.data, activity.getResources().getDisplayMetrics());
+        }
+        return result;
     }
 
     private View.OnClickListener handleButtonClick(final int row, final int column) {

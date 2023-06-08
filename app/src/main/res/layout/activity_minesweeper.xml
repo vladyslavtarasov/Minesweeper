@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/back_button"
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/back"
             android:onClick="back"
-            android:layout_gravity="start" />
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/timer_text"
@@ -36,14 +37,23 @@
             android:layout_height="wrap_content"
             android:text="@string/restart"
             android:onClick="restart"
-            android:layout_gravity="end" />
+            android:layout_marginEnd="10dp"/>
 
     </LinearLayout>
 
-    <GridLayout
-        android:id="@+id/grid_layout"
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </GridLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <GridLayout
+            android:id="@+id/grid_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </GridLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

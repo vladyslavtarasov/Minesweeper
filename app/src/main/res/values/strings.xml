@@ -4,4 +4,7 @@
     <string name="back">Back</string>
     <string name="restart">Restart</string>
     <string name="_00_00_00">00:00:00</string>
+    <string name="small">Small (10x5)</string>
+    <string name="medium">Medium (15x10)</string>
+    <string name="large">Large (20x15)</string>
 </resources>

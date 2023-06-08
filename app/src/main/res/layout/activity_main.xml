@@ -5,20 +5,39 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/main_menu_layout"
+    <RadioGroup
+        android:id="@+id/grid_size_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/start_button"
+        <RadioButton
+            android:id="@+id/radio_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/start"
-            android:onClick="startGame" />
+            android:text="@string/small"
+            android:checked="true" />
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medium" />
+
+        <RadioButton
+            android:id="@+id/radio_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/large" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:onClick="startGame" />
+
 
 </LinearLayout>
