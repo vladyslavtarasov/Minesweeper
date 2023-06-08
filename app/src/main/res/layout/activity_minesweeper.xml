@@ -6,7 +6,7 @@
     android:gravity="center">
 
     <LinearLayout
-        android:id="@+id/buttons_layout"
+        android:id="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,11 +17,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/back"
-            android:onClick="back" />
+            android:onClick="back"
+            android:layout_gravity="start" />
 
-        <Space
+        <TextView
+            android:id="@+id/timer_text"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/_00_00_00"
             android:layout_weight="1" />
 
         <Button
@@ -29,7 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/restart"
-            android:onClick="restart" />
+            android:onClick="restart"
+            android:layout_gravity="end" />
 
     </LinearLayout>
 

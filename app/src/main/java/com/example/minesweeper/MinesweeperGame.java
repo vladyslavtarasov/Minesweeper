@@ -1,6 +1,5 @@
 package com.example.minesweeper;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
@@ -11,15 +10,15 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MinesweeperGame {
-    private final Context context;
+    private final MinesweeperActivity activity;
     private final int rows;
     private final int columns;
     private final int[][] grid;
     private final Button[][] buttons;
     private boolean gameOver;
 
-    public MinesweeperGame(Context context, int rows, int columns) {
-        this.context = context;
+    public MinesweeperGame(MinesweeperActivity activity, int rows, int columns) {
+        this.activity = activity;
         this.rows = rows;
         this.columns = columns;
         this.grid = new int[rows][columns];
@@ -46,13 +45,13 @@ public class MinesweeperGame {
         gridLayout.setColumnCount(columns);
         gridLayout.setRowCount(rows);
 
-        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
+        int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = activity.getResources().getDisplayMetrics().heightPixels;
         int buttonSize = Math.min(screenWidth / columns, screenHeight / rows);
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                buttons[i][j] = new Button(context);
+                buttons[i][j] = new Button(activity);
                 buttons[i][j].setLayoutParams(new GridLayout.LayoutParams());
                 buttons[i][j].setPadding(0, 0, 0, 0);
                 buttons[i][j].setTextSize(20);
@@ -78,6 +77,7 @@ public class MinesweeperGame {
                         revealMines();
                         showMessage("Game Over!");
                         gameOver = true;
+                        activity.stopTimer();
                     } else if (grid[row][column] == 0) {
                         revealEmptyCells(row, column);
                         checkWinCondition();
@@ -186,11 +186,12 @@ public class MinesweeperGame {
 
         if (revealedCells == totalCells) {
             showMessage("Congratulations! You win!");
+            activity.stopTimer();
             gameOver = true;
         }
     }
 
     private void showMessage(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 }
