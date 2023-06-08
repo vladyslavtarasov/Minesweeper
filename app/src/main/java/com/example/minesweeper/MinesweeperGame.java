@@ -26,8 +26,8 @@ public class MinesweeperGame {
         this.grid = new int[rows][columns];
         this.buttons = new Button[rows][columns];
         this.gameOver = false;
-        //mines = (rows * columns) / 6;
-        mines = 1;
+        mines = (rows * columns) / 6;
+        //mines = 1;
     }
 
     public void createGame(GridLayout gridLayout) {
