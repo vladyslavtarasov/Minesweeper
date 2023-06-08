@@ -93,7 +93,7 @@ public class MinesweeperGame {
     private void placeMines() {
         Random random = new Random();
 
-        int mines = (rows * columns) / 6; // Adjust the mine density as needed
+        int mines = (rows * columns) / 6;
 
         for (int i = 0; i < mines; i++) {
             int row = random.nextInt(rows);
