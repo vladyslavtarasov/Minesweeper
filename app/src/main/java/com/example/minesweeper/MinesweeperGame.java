@@ -17,6 +17,7 @@ public class MinesweeperGame {
     private final int[][] grid;
     private final Button[][] buttons;
     private boolean gameOver;
+    private final int mines;
 
     public MinesweeperGame(MinesweeperActivity activity, int rows, int columns) {
         this.activity = activity;
@@ -25,6 +26,8 @@ public class MinesweeperGame {
         this.grid = new int[rows][columns];
         this.buttons = new Button[rows][columns];
         this.gameOver = false;
+        //mines = (rows * columns) / 6;
+        mines = 1;
     }
 
     public void createGame(GridLayout gridLayout) {
@@ -95,7 +98,7 @@ public class MinesweeperGame {
             public void onClick(View view) {
                 if (!gameOver) {
                     if (grid[row][column] == -1) {
-                        revealMines();
+                        revealMines(false);
                         showMessage("Game Over!");
                         gameOver = true;
                         activity.stopTimer();
@@ -113,8 +116,6 @@ public class MinesweeperGame {
 
     private void placeMines() {
         Random random = new Random();
-
-        int mines = (rows * columns) / 6;
 
         for (int i = 0; i < mines; i++) {
             int row = random.nextInt(rows);
@@ -182,12 +183,13 @@ public class MinesweeperGame {
         }
     }
 
-    private void revealMines() {
+    private void revealMines(boolean isWin) {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (grid[i][j] == -1) {
                     buttons[i][j].setText("X");
-                    buttons[i][j].setBackgroundColor(Color.RED);
+                    if (isWin) buttons[i][j].setBackgroundColor(Color.GREEN);
+                    else buttons[i][j].setBackgroundColor(Color.RED);
                     buttons[i][j].setEnabled(false);
                 }
             }
@@ -205,10 +207,11 @@ public class MinesweeperGame {
             }
         }
 
-        if (revealedCells == totalCells) {
+        if (revealedCells == totalCells - mines) {
             showMessage("Congratulations! You win!");
             activity.stopTimer();
             gameOver = true;
+            revealMines(true);
         }
     }
 
